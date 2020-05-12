@@ -66,17 +66,6 @@ void FrameProc::GetFrame(ThreadSafeQueue<Mat>& safe_queue)
         safe_queue.push(frame); // push the frame to sample
         cout << "Item pushed: safe_queue.size=" << safe_queue.get_size() << endl;
         // cout << "GetFrame thread_id:" << std::this_thread::get_id() << endl; // uncomment to print thread_id
-
-        //wait for for 10 ms until any key is pressed.  
-        //If the 'Esc' key is pressed, break the while loop.
-        //If the any other key is pressed, continue the loop 
-        //If any key is not pressed withing 10 ms, continue the loop
-        if (waitKey(10) == 27)
-        {
-            cout << "Esc key is pressed by user. Stoppig the video" << endl;
-            cap->release();
-            break;
-        }
     }    
 }
 

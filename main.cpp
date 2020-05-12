@@ -12,7 +12,7 @@ int main(int argc, char** argv)
         return -1;
     }
 
-    string fname = argv[1];   // "samples/iron-man.mp4"; 
+    string fname = argv[1]; "samples/iron-man.mp4"; 
     FrameProc *video_proc = new FrameProc(fname, CAP_GSTREAMER);    // CAP_FFMPEG, CAP_GSTREAMER availlable
     video_proc->ProcessVideo();  // starts two threads and joins them further
 

@@ -1,5 +1,5 @@
 # Opencv video processing
-A multihreaded console application processing video file using two std::threads.
+A multithreaded console application processing video file using two std::threads.
 
 1. Change directory to CMakeLists.txt file dir. 
 2. Type in terminal:<br>

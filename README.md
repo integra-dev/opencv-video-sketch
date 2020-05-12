@@ -11,4 +11,4 @@ OpenCV has a number of backends. To change it use ``CAP_GSTREAMER``, ``CAP_FFMPE
 
 The GIF below demostrates reults of video processing.
 
-<img alt="OpenCV multithreading demo" src="" width="600">
+<img alt="OpenCV multithreading demo" src="https://github.com/integra-dev/opencv-video-sketch/blob/master/gif/opencv-sketch-min.gif" width="600">

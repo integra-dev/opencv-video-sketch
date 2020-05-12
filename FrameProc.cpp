@@ -39,14 +39,16 @@ void FrameProc::ProcessVideo()
     thread process_thread(&FrameProc::ProcessFrame, this, std::ref(safe_queue), std::ref(m_q));*/
 
     auto get_thread = get_frame_thread();
-    auto process_thread = process_frame_thread();
+    ProcessFrame(safe_queue);       // starting processing and visualozing in main thread
+    //auto process_thread = process_frame_thread();
 
     if(get_thread.joinable()) get_thread.join();
-    if (process_thread.joinable()) process_thread.join();
+    // if (process_thread.joinable()) process_thread.join();
+
 }
 
 
-void FrameProc::GetFrame(ThreadSafeQueue<Mat>& safe_queue, std::recursive_mutex& m_q)
+void FrameProc::GetFrame(ThreadSafeQueue<Mat>& safe_queue)
 {       
     while (true)
     {
@@ -79,7 +81,7 @@ void FrameProc::GetFrame(ThreadSafeQueue<Mat>& safe_queue, std::recursive_mutex&
 }
 
 
-void FrameProc::ProcessFrame(ThreadSafeQueue<Mat>& safe_queue, std::recursive_mutex& m_q)
+void FrameProc::ProcessFrame(ThreadSafeQueue<Mat>& safe_queue)
 {
     while (true)
     {
@@ -107,7 +109,7 @@ void FrameProc::ProcessFrame(ThreadSafeQueue<Mat>& safe_queue, std::recursive_mu
             namedWindow(window_name, WINDOW_FREERATIO);
             imshow(window_name, edges);
 
-            waitKey(fps);
+            waitKey(1000 / fps);
         }
     }
 }

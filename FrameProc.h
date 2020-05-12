@@ -5,7 +5,6 @@ FrameProc gets frames from video file and and processes in another thread usingt
 #include <iostream>
 #include <cassert>
 #include <cstring>
-#include <shared_mutex>
 
 // thread-safe-queue for processing frames in threads
 #include "ThreadSafeQueue.h"
@@ -21,13 +20,11 @@ using namespace cv;
 
 
 class FrameProc {
-
 	string window_name;
 	std::shared_ptr<VideoCapture> cap;
 	string video_fname;
 	bool frames_ended;
 	ThreadSafeQueue<Mat> safe_queue;
-	std::recursive_mutex m_q;
 	int fps;
 public:
 	FrameProc(const string&, int);
@@ -35,14 +32,14 @@ public:
 
 	bool IsVideoCapOk(std::shared_ptr<VideoCapture> cap);
 	void ProcessVideo();
-	void GetFrame(ThreadSafeQueue<Mat>&, std::recursive_mutex&);
-	void ProcessFrame(ThreadSafeQueue<Mat>&, std::recursive_mutex&);
-	
+	void GetFrame(ThreadSafeQueue<Mat>&);
+	void ProcessFrame(ThreadSafeQueue<Mat>&);
+
 	std::thread get_frame_thread() 
 	{
 		return std::thread([this] 
 			{
-				GetFrame(std::ref(safe_queue), std::ref(m_q)); 
+				GetFrame(std::ref(safe_queue)); 
 			});
 	}
 	
@@ -50,7 +47,9 @@ public:
 	{
 		return std::thread([this] 
 			{ 
-				ProcessFrame(std::ref(safe_queue), std::ref(m_q)); 
+				ProcessFrame(std::ref(safe_queue)); 
 			});
 	}
+
+
 };

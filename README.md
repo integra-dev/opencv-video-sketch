@@ -1,12 +1,15 @@
 # Opencv video processing
-A multithreaded console application processing video file using two std::threads.
+A multithreaded console application processing video file using std::thread to push frames to thread-safe-queue (using __GStreamer__ library) and main thread to process and render popped frames (using __OpenCV__).
 
 1. Change directory to CMakeLists.txt file dir. 
 2. Type in terminal:<br>
 ``$cmake .``<br>
 ``$make``
 
-OpenCV has a number of backends. To change it use ``CAP_GSTREAMER``, ``CAP_FFMPEG`` etc. in <br>``FrameProc *video_proc = new FrameProc(fname, CAP_GSTREAMER);`` on line 16 of ``main.cpp``. The application gets the filepath of the video file as an argument and uses two ``std::thread``: one thread decodes the frames from ``cv::VideoCapture`` and adds to thread-safe-queue, the second thread gets frames from the queue, processes and shows using ``cv::imshow``. Processing is the ``cv::GaussianBlur`` and extracting contours using ``cv::Canny``. Thread write the size of queue to console after ``push()`` and ``pop()`` operations.
+OpenCV has a number of backends. To change it use ``CAP_GSTREAMER``, ``CAP_FFMPEG`` etc. in <br>``FrameProc *video_proc = new FrameProc(fname, CAP_GSTREAMER);`` on line 17 of ``main.cpp``. The application gets the filepath of the video file as an argument and uses ``std::thread`` to decode frames with gstreamer API and add to thread-safe-queue, the main thread gets frames from the queue, processes and shows using ``cv::imshow``. Processing is the ``cv::GaussianBlur`` and extracting contours using ``cv::Canny``. Application writes the size of queue to console after ``push()`` and ``pop()`` operations. CPU usage in current configuration is estimated as 9.3%. If gstreamer pipeline contains ``sync=false`` than CPU usage is estimated to 320%.
+
+
+For documentation of GStreamer in Russian see [here](http://rus-linux.net/MyLDP/BOOKS/gstreamer/10-helloworld.html).
 
 
 The GIF below demostrates reults of video processing.

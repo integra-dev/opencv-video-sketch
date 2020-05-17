@@ -9,9 +9,9 @@ The class is based on std::queue and implementing of mutex and std::condition_va
 #include <mutex>
 #include <condition_variable>
 
-#pragma once
 using namespace std;
 
+#pragma once
 
 template <class T>
 class ThreadSafeQueue
@@ -21,6 +21,11 @@ class ThreadSafeQueue
     std::condition_variable cond_;
 
 public:
+    ThreadSafeQueue() { };
+    ThreadSafeQueue(const ThreadSafeQueue& s_q) {         // custom copy constructor
+        queue_ = s_q.queue_;
+    };
+
     T pop()
     {
         std::unique_lock<std::mutex> mlock(mutex_);
@@ -30,7 +35,7 @@ public:
         }
         auto item = queue_.front();
         queue_.pop();
-
+        mlock.unlock();
         return item;
     }
 

@@ -65,6 +65,7 @@ void FrameProc::ProcessFrame()
 {
     while (true)
     {
+		g_main_iteration(false);
         if (frames_ended)   // the last frame was decoded
         {
 			g_decoder->ClearPipeLine();

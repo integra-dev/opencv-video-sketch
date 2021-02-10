@@ -6,9 +6,9 @@
 #include <iostream>
 
 // GStreamer 
-#include <gst\gst.h>
-#include <gst\app\gstappsink.h>
-#include <gst\app\gstappsrc.h>
+#include <gst/gst.h>
+#include <gst/app/gstappsink.h>
+#include <gst/app/gstappsrc.h>
 
 // OpenCV functions
 #include "opencv2/imgproc/imgproc.hpp"

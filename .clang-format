@@ -1,0 +1,10 @@
+---
+# We'll use defaults from the Google style
+BasedOnStyle: Google
+
+Language: Cpp
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+ColumnLimit: 100

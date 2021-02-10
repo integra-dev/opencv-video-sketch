@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
         return -1;
    }
 
-    g_main_iteration(false);
+//    g_main_iteration(false);
     string fname = argv[1];  // "samples/iron-man.mp4";
     std::shared_ptr<FrameProc> video_proc = std::make_shared<FrameProc>(fname, CAP_GSTREAMER);    // CAP_FFMPEG, CAP_GSTREAMER availlable
     video_proc->InitGDecoder(argc, argv);

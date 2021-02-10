@@ -32,7 +32,7 @@
 *.app
 
 # test videos
-./samples/*
+samples/*
 
 # build
-./build/*
+build/*
